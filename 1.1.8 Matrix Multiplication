@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int main() {
+    int m, n;
+    // Read dimensions of Matrix A
+    if (scanf("%d %d", &m, &n) != 2) return 0;
+
+    int A[100][100];
+    // Read elements of Matrix A
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    int w, p;
+    // Read dimensions of Matrix B
+    if (scanf("%d %d", &w, &p) != 2) return 0;
+
+    // Check if matrix multiplication is valid (columns of A must equal rows of B)
+    if (n != w) {
+        printf("Invalid input\n");
+        return 0; // Exits immediately, skipping reading the elements of Matrix B
+    }
+
+    int B[100][100];
+    // Read elements of Matrix B only if valid
+    for (int i = 0; i < w; i++) {
+        for (int j = 0; j < p; j++) {
+            scanf("%d", &B[i][j]);
+        }
+    }
+
+    int C[100][100] = {0};
+    // Perform matrix multiplication (A x B)
+    for (int i = 0; i < m; i++) {
