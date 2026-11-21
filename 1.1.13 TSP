@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <string.h>
+
+#define INF 1e9
+
+int n;
+int dist[20][20];
+int memo[1 << 20][20];
+
+
+int tsp(int mask, int u) {
+
+	if (mask == (1 << n) - 1) {
+	if (dist[u][0] != -1) {
+	return dist[u][0];
+	}
+	return INF;
+	}
+
+
+	if (memo[mask][u] != -1) {
+	return memo[mask][u];
+	}
+
+    int ans = INF;
+
+
+	for (int v = 0; v < n; v++) {
+		if (!(mask & (1 << v)) && dist[u][v] != -1) {
+			 int res = tsp(mask | (1 << v), v);
+			if (res != INF) {
+				if (dist[u][v] + res < ans) {
+					ans = dist[u][v] + res;
+				}
+			}
+		}
