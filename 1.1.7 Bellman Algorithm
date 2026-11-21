@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define INF 100000000
+
+// Edge structure
+typedef struct {
+    int u, v, w;
+} Edge;
+
+// Path print karne ke liye recursive function
+void printPath(int parent[], int vertex, int src) {
+    if (vertex == src) {
+        printf("%d", src);
+        return;
+    }
+    printPath(parent, parent[vertex], src);
+    printf("->%d", vertex);
+}
+
+int main() {
+    int V, E;
+    if (scanf("%d %d", &V, &E) != 2) return 0;
+
+    Edge *edges = (Edge *)malloc(E * sizeof(Edge));
+    for (int i = 0; i < E; i++) {
+        scanf("%d %d %d", &edges[i].u, &edges[i].v, &edges[i].w);
+    }
+
+    int src;
+    scanf("%d", &src);
+
+    // Distance aur parent arrays initialize karein
+    int *dist = (int *)malloc((V + 1) * sizeof(int));
+    int *parent = (int *)malloc((V + 1) * sizeof(int));
+
